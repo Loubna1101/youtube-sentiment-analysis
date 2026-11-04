@@ -1,0 +1,6 @@
+*
+!requirements.txt
+!app_api.py
+!app/
+!models/sentiment_pipeline.joblib
+**/__pycache__

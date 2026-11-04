@@ -1,0 +1,11 @@
+-r requirements.txt
+
+# Entraînement / notebooks
+pandas
+matplotlib
+ipykernel
+nbconvert
+
+# Tests
+httpx
+pytest

@@ -1,0 +1,16 @@
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+logs/
+*.log
+node_modules/
+.env
+
+# Données (volumineuses, reproductibles via les notebooks)
+data/
+
+# Modèles : on ne versionne que le pipeline utilisé par l'API
+models/*
+!models/sentiment_pipeline.joblib

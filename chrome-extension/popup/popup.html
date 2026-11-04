@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YouTube Sentiment Analyzer</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="logo" aria-hidden="true">▶</span>
+      <div>
+        <h1>Sentiment Analyzer</h1>
+        <p id="videoTitle" class="muted">—</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <span id="apiDot" class="dot" title="État de l'API"></span>
+      <button id="themeBtn" class="icon-btn" title="Mode sombre / clair" aria-label="Changer de thème">🌓</button>
+      <button id="settingsBtn" class="icon-btn" title="Paramètres" aria-label="Paramètres">⚙️</button>
+    </div>
+  </header>
+
+  <section id="settings" class="card" hidden>
+    <label for="apiUrl">URL de l'API</label>
+    <div class="row">
+      <input id="apiUrl" type="url" placeholder="http://localhost:8000">
+      <button id="saveSettings" class="btn small">OK</button>
+    </div>
+    <label class="check"><input id="includeReplies" type="checkbox"> Inclure les réponses (threads)</label>
+    <label for="target">Commentaires à charger (défilement)</label>
+    <input id="target" type="number" min="20" max="2000" step="20" value="200">
+  </section>
+
+  <div class="toolbar">
+    <button id="analyzeBtn" class="btn primary">Analyser</button>
+    <button id="loadMoreBtn" class="btn">Charger plus</button>
+  </div>
+
+  <div id="status" class="status" role="status" hidden></div>
+  <div id="progress" class="progress" hidden><div id="progressBar"></div></div>
+
+  <main id="results" hidden>
+    <section class="card summary">
+      <div class="chart-wrap">
+        <canvas id="donut" width="160" height="160" aria-label="Répartition des sentiments"></canvas>
+        <div class="chart-center"><strong id="totalCount">0</strong><span class="muted">commentaires</span></div>
+      </div>
+      <div class="bars" id="bars"></div>
+    </section>
+
+    <section class="kpis">
+      <div class="card kpi"><span class="muted">Score moyen</span><strong id="avgScore">0</strong></div>
+      <div class="card kpi"><span class="muted">Dominant</span><strong id="dominant">—</strong></div>
+      <div class="card kpi"><span class="muted">Confiance moy.</span><strong id="avgConf">—</strong></div>
+    </section>
+
+    <div class="filters" role="group" aria-label="Filtres">
+      <button class="chip active" data-filter="all">Tous</button>
+      <button class="chip pos" data-filter="positive">Positifs</button>
+      <button class="chip neu" data-filter="neutral">Neutres</button>
+      <button class="chip neg" data-filter="negative">Négatifs</button>
+    </div>
+    <div class="row">
+      <input id="search" type="search" placeholder="Rechercher dans les commentaires…">
+      <select id="sort" aria-label="Tri">
+        <option value="order">Ordre d'origine</option>
+        <option value="conf">Confiance ↓</option>
+        <option value="pos">Plus positifs</option>
+        <option value="neg">Plus négatifs</option>
+      </select>
+    </div>
+
+    <ul id="list" class="list"></ul>
+    <button id="moreBtn" class="btn" hidden>Afficher plus</button>
+
+    <div class="export">
+      <button id="copyBtn" class="btn">📋 Copier</button>
+      <button id="csvBtn" class="btn">⬇ CSV</button>
+      <button id="jsonBtn" class="btn">⬇ JSON</button>
+    </div>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="popup.js"></script>
+</body>
+</html>
